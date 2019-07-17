@@ -11,3 +11,13 @@ HEALTHCHECK --interval=5s \
 
 # tell docker what port to expose
 EXPOSE 8000
+
+FROM jenkins/jenkins:lts
+ 
+USER root
+RUN apt-get update
+RUN apt-get install  sudo 
+RUN rm -rf /var/lib/apt/lists/*
+RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
+ 
+USER jenkins
